@@ -2,6 +2,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 AHole::AHole()
 {
@@ -47,7 +48,7 @@ void AHole::Tick(float DeltaTime)
 		if(CurrentDistance < TotalDistance)
 		{
 			FVector Location = GetActorLocation();
-			Location += Destination * MoveSpeed * DeltaTime;
+			Location += Destination * MoveSpeed * UGameplayStatics::GetWorldDeltaSeconds(this);
 			SetActorLocation(Location);
 			CurrentDistance = (Location - StartLocation).Size();
 		}

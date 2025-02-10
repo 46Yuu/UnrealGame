@@ -4,7 +4,7 @@
 
 ABall::ABall()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	
 	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collider"));
 	RootComponent = SphereComp;
@@ -27,10 +27,10 @@ void ABall::BeginPlay()
 	BaseLocation = GetActorLocation();
 }
 
-void ABall::Tick(float DeltaTime)
+/*void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-}
+}*/
 
 void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -41,10 +41,14 @@ void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimi
 			TEXT("HELLO"));
 		if(ExplosionVFX)
 		{
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-				this,
+			UNiagaraFunctionLibrary::SpawnSystemAttached(
 				ExplosionVFX,
-				GetActorLocation());
+				OtherComp,
+				NAME_None,
+				OtherActor->GetActorLocation(),
+				OtherActor->GetActorRotation(),
+				EAttachLocation::Type::KeepWorldPosition,
+				true);
 		}
 		GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::ResetPosition, DelayReset, false);
 		return;
