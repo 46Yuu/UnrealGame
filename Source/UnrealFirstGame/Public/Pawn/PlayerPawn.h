@@ -8,6 +8,7 @@ class ABall;
 class UInputMappingContext;
 class UInputAction;
 class UCameraComponent;
+class UNiagaraSystem;
 
 UCLASS()
 class UNREALFIRSTGAME_API APlayerPawn : public APawn
@@ -44,13 +45,30 @@ private:
 	TSubclassOf<ABall> BallClass;
 	
 	void RotateShootDirection(const FVector& LookAtTarget);
+	
 	void StartFire();
+	
 	double PressedTimer;
+	
 	bool IsPressing;
+	
 	UPROPERTY(EditAnywhere, Category = "Ball Properties")
 	float MaxShootPower;
+	
 	UPROPERTY(EditAnywhere, Category = "Ball Properties")
 	double DelayToMaxShoot;
+
+	UPROPERTY(EditAnywhere, Category = "AimLineVFX")
+	UNiagaraSystem* AimLineVFX;
+
+	void CreateLine();
+	
+	FTimerHandle DelayBeforeNewPoints;
+	
+	UPROPERTY(EditAnywhere, Category = "AimLineVFX")
+	float DelayNewPoints = 1.f;
+
+	FHitResult HitResult;
 	
 	void Fire();
 };

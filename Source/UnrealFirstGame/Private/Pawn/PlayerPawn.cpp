@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
 
 APlayerPawn::APlayerPawn()
 {
@@ -29,19 +30,19 @@ void APlayerPawn::BeginPlay()
 			Subsystem->AddMappingContext(PlayerContext, 0);
 		}
 	}
+	
 }
 
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,false);
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
-		FHitResult HitResult;
 		PlayerController->GetHitResultUnderCursor(
 			ECC_Visibility,
 			false,
 			HitResult);
-
 		RotateShootDirection(HitResult.ImpactPoint);
 	}
 	if(IsPressing)
@@ -82,7 +83,8 @@ void APlayerPawn::StartFire()
 void APlayerPawn::Fire()
 {
 	IsPressing = false;
-	float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedTimer);
+	float PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
+	float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedLerped);
 	PressedTimer = 0;
 	FVector BallSpawnPointLocation = BallSpawnPoint->GetComponentLocation();
 	FRotator BallSpawnPointRotation = BallSpawnPoint->GetComponentRotation();
@@ -94,8 +96,20 @@ void APlayerPawn::Fire()
 		auto Ball = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
 		Ball->SphereComp->AddImpulse(Ball->GetActorForwardVector()*PowerShoot);
 	}
+}
 
+void APlayerPawn::CreateLine()
+{
+	for(float i = 0.1;i < 0.6; i++)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				this,
+				AimLineVFX,
+				FMath::Lerp(BallSpawnPoint->GetComponentLocation(),HitResult.ImpactPoint,i),
+				BallSpawnPoint->GetComponentRotation());
+	}
 	
 }
+
 
 
