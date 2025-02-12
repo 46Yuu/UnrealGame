@@ -1,7 +1,13 @@
 #include "Actors/Ball.h"
+
+#include <string>
+
 #include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
 #include "NiagaraComponent.h"
+#include "Actors/Hole.h"
+#include "GameMode/GameModeBallGame.h"
+#include "Kismet/GameplayStatics.h"
 
 ABall::ABall()
 {
@@ -41,42 +47,27 @@ void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimi
 {
 	if(OtherComp->ComponentHasTag("HOLE_BOTTOM"))
 	{
-		if(ExplosionVFX)
-		{
-			HideBall();
-			UNiagaraFunctionLibrary::SpawnSystemAttached(
-				ExplosionVFX,
-				OtherComp,
-				NAME_None,
-				OtherActor->GetActorLocation(),
-				OtherActor->GetActorRotation(),
-				EAttachLocation::Type::KeepWorldPosition,
-				true);
-		}
-		GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
+		BallInHole(OtherActor,OtherComp);
 		return;
 	}
 	if(OtherActor->ActorHasTag("HOLE") && Comp->GetCollisionProfileName()!= "Ball_Hole")
 	{
 		Comp->SetCollisionProfileName("Ball_Hole",false);
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-			Comp->GetCollisionProfileName().ToString());
 	}
 	if(OtherComp->ComponentHasTag("DESTROYER"))
 	{
 		DestroyBallEffect();
+		ResetCombo();
 	}
 
 }
 
-void ABall::OnEndOverlap(class UPrimitiveComponent* Comp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+void ABall::OnEndOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
 	if(OtherActor->ActorHasTag("HOLE") && Comp->GetCollisionProfileName()!= "PhysicsActor")
 	{
 		Comp->SetCollisionProfileName("PhysicsActor");
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-			Comp->GetCollisionProfileName().ToString());
 	}
 }
 
@@ -114,6 +105,7 @@ void ABall::HideBall()
 	SphereComp->SetVisibility(false);
 	BaseMesh->SetVisibility(false);
 	SphereComp->SetSimulatePhysics(false);
+	SphereComp->SetGenerateOverlapEvents(false);
 	GetWorldTimerManager().SetTimer(DelayHideTrail, this, &ABall::HideTrail, DelayHide, false);
 }
 
@@ -121,5 +113,67 @@ void ABall::HideTrail()
 {
 	TrailVFXComp->SetVisibility(false);
 }
+
+void ABall::BallInHole(AActor* OtherActor, UPrimitiveComponent* OtherComp)
+{
+	if(ExplosionVFX)
+	{
+		HideBall();
+		UNiagaraFunctionLibrary::SpawnSystemAttached(
+			ExplosionVFX,
+			OtherComp,
+			NAME_None,
+			OtherActor->GetActorLocation(),
+			OtherActor->GetActorRotation(),
+			EAttachLocation::Type::KeepWorldPosition,
+			true);
+		IncrementHoleMultiplier(OtherActor);
+		IncrementScore(OtherActor);
+	}
+	GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
+}
+
+void ABall::IncrementScore(AActor* OtherActor)
+{
+	IncrementCombo();
+	AHole* HoleActor = Cast<AHole>(OtherActor);
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	int ScoreToAdd = BasePoint * HoleActor->BaseMultiplier * BallGameMode->CurrentCombo;
+	BallGameMode->CurrentScore = BallGameMode->CurrentScore + ScoreToAdd;
+	FString FloatScore = FString::SanitizeFloat(BallGameMode->CurrentScore);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
+	*FloatScore);
+
+}
+
+void ABall::IncrementCombo()
+{
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	BallGameMode->CurrentCombo++;
+	FString FloatCombo = FString::SanitizeFloat(BallGameMode->CurrentCombo);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue,
+	*FloatCombo);
+}
+
+void ABall::IncrementHoleMultiplier(AActor* OtherActor)
+{
+	AHole* HoleActor = Cast<AHole>(OtherActor);
+	HoleActor->BaseMultiplier++;
+	FString Multiplier = FString::SanitizeFloat(HoleActor->BaseMultiplier);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue,
+	*Multiplier);
+	HoleActor->UpdateTextRenderer();
+}
+
+void ABall::ResetCombo()
+{
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	BallGameMode->CurrentCombo = 0;
+	FString FloatCombo = FString::SanitizeFloat(BallGameMode->CurrentCombo);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue,
+	*FloatCombo);
+}
+
+
 
 

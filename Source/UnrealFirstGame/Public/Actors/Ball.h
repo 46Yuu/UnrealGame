@@ -36,7 +36,7 @@ private:
 	                           int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnEndOverlap(class UPrimitiveComponent* Comp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+	void OnEndOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex);
 
 	void ResetPosition();
@@ -45,6 +45,19 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "InHole")
 	UNiagaraSystem* ExplosionVFX;
+
+	void BallInHole(AActor* OtherActor, UPrimitiveComponent* OtherComp);
+
+	void IncrementScore(AActor* OtherActor);
+
+	void IncrementCombo();
+
+	void IncrementHoleMultiplier(AActor* OtherActor);
+
+	void ResetCombo();
+
+	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
+	float BasePoint = 1;
 
 	FTimerHandle DelayBeforeReset;
 

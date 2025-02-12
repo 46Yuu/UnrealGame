@@ -2,6 +2,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/TextRenderComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 AHole::AHole()
@@ -30,14 +31,24 @@ AHole::AHole()
 	HoleMask->SetRenderInDepthPass(false);
 	HoleMask->SetRenderCustomDepth(true);
 
+	TextRenderComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Text Renderer"));
+	TextRenderComponent->SetupAttachment(SphereComp);
+
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 	BoxComp->SetupAttachment(RootComponent);
 }
+	
 
 void AHole::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AHole::MoveTowardsNextPoint, MoveDelay, false);
+	CreateRandomCheckpoints();
+	if(CheckPointLocationList.Num()>0)
+	{
+		this->SetActorLocation(CheckPointLocationList[0]);
+	}
+	UpdateTextRenderer();
 }
 
 void AHole::Tick(float DeltaTime)
@@ -78,3 +89,23 @@ void AHole::MoveTowardsNextPoint()
 	}
 }
 
+void AHole::CreateRandomCheckpoints()
+{
+	for(int i =0; i< CheckPointsCount;i++)
+	{
+		FVector CheckpointPos;
+		FVector VerticalPos = FMath::Lerp(BottomLeftPoint,TopLeftPoint,FMath::FRandRange(0.f,1.f));
+		FVector HorizontalPos = FMath::Lerp(BottomLeftPoint,BottomRightPoint,FMath::FRandRange(0.f,1.f));
+		CheckpointPos = VerticalPos;
+		CheckpointPos.Y = HorizontalPos.Y;
+		CheckPointLocationList.Add(CheckpointPos);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
+			CheckpointPos.ToString());
+	}
+}
+
+void AHole::UpdateTextRenderer()
+{
+	FString Multiplier = FString::FromInt(BaseMultiplier);
+	TextRenderComponent->SetText(FText::FromString("x"+Multiplier));
+}

@@ -38,18 +38,25 @@ void APlayerPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
+		FHitResult TempHitResult;
 		PlayerController->GetHitResultUnderCursor(
 			ECC_Visibility,
 			false,
-			HitResult);
-		RotateShootDirection(HitResult.ImpactPoint);
+			TempHitResult);
+		UPrimitiveComponent* Comp = TempHitResult.GetComponent();
+		if (Comp != nullptr)
+		{
+			if(!Comp->ComponentHasTag("TRANSPARENT"))
+			{
+				HitResult = TempHitResult;
+				RotateShootDirection(HitResult.ImpactPoint);
+			}
+		}
+		
 	}
 	if(IsPressing)
 	{
-		if(PressedTimer < DelayToMaxShoot)
-		{
-			PressedTimer += UGameplayStatics::GetWorldDeltaSeconds(this);
-		}
+		IncrementPressedTimer();
 	}
 }
 
@@ -77,29 +84,31 @@ void APlayerPawn::RotateShootDirection(const FVector& LookAtTarget)
 void APlayerPawn::StartFire()
 {
 	IsPressing = true;
+	IsIncreasing = true;
+	FVector BallSpawnPointLocation = BallSpawnPoint->GetComponentLocation();
+	FRotator BallSpawnPointRotation = BallSpawnPoint->GetComponentRotation();
+	FTransform SpawnBallTransform(BallSpawnPointRotation, BallSpawnPointLocation,FVector(1,1,1));
+	CurrentBall = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
+	CurrentBall->SphereComp->SetSimulatePhysics(false);
 }
 
 void APlayerPawn::Fire()
 {
 	IsPressing = false;
-	float PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
 	float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedLerped);
 	PressedTimer = 0;
-	FVector BallSpawnPointLocation = BallSpawnPoint->GetComponentLocation();
-	FRotator BallSpawnPointRotation = BallSpawnPoint->GetComponentRotation();
-	FTransform SpawnBallTransform(BallSpawnPointRotation, BallSpawnPointLocation,FVector(1,1,1));
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-			SpawnBallTransform.ToString());
+	PressedLerped = 0;
 	if (BallClass != nullptr)
 	{
-		auto Ball = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
-		Ball->SphereComp->AddImpulse(Ball->GetActorForwardVector()*PowerShoot);
+		CurrentBall->SphereComp->SetSimulatePhysics(true);
+		CurrentBall->SphereComp->SetWorldRotation(BallSpawnPoint->GetComponentRotation());
+		CurrentBall->SphereComp->AddImpulse(CurrentBall->GetActorForwardVector()*PowerShoot);
 	}
 }
 
 void APlayerPawn::CreateLine()
 {
-	for(float i = 0.0;i < 0.6; i = i + 0.1f)
+	for(float i = 0.0;i < 1; i = i + 0.2f)
 	{
 		if(AimLineVFX)
 		{
@@ -111,6 +120,28 @@ void APlayerPawn::CreateLine()
 		}
 	}
 	
+}
+
+void APlayerPawn::IncrementPressedTimer()
+{
+	if(PressedTimer < DelayToMaxShoot && IsIncreasing)
+	{
+		PressedTimer += UGameplayStatics::GetWorldDeltaSeconds(this);
+		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
+		if(PressedTimer >=DelayToMaxShoot)
+		{
+			IsIncreasing = false;
+		}
+	}
+	else if(PressedTimer > 0 && !IsIncreasing)
+	{
+		PressedTimer -= UGameplayStatics::GetWorldDeltaSeconds(this);
+		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
+		if(PressedTimer <=0)
+		{
+			IsIncreasing = true;
+		}
+	}
 }
 
 

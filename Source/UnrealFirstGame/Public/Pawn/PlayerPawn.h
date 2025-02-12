@@ -20,6 +20,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot Properties")
+	float PressedLerped = 0.f;
 protected:
 	virtual void BeginPlay() override;
 	
@@ -47,10 +50,15 @@ private:
 	void RotateShootDirection(const FVector& LookAtTarget);
 	
 	void StartFire();
+
+	ABall* CurrentBall;
 	
 	double PressedTimer;
 	
 	bool IsPressing;
+	bool IsIncreasing = true;
+
+	void IncrementPressedTimer();
 	
 	UPROPERTY(EditAnywhere, Category = "Ball Properties")
 	float MaxShootPower;

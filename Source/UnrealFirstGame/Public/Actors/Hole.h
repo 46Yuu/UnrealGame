@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Hole.generated.h"
+class UTextRenderComponent;
 class USphereComponent;
 class UBoxComponent;
 class UStaticMeshComponent;
@@ -15,6 +16,11 @@ class UNREALFIRSTGAME_API AHole : public AActor
 public:	
 	AHole();
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
+	int BaseMultiplier = 1;
+
+	void UpdateTextRenderer();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -32,6 +38,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UBoxComponent* BoxComp;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UTextRenderComponent* TextRenderComponent;
 
 	FTimerHandle MoveTimerHandle;
 	
@@ -42,7 +51,21 @@ private:
 	float MoveSpeed = 2.f;
 
 	UPROPERTY(EditAnywhere, Category = "Checkpoints")
+	FVector BottomLeftPoint;
+	
+	UPROPERTY(EditAnywhere, Category = "Checkpoints")
+	FVector TopLeftPoint;
+	
+	UPROPERTY(EditAnywhere, Category = "Checkpoints")
+	FVector BottomRightPoint;
+
+	UPROPERTY(EditAnywhere, Category = "Checkpoints")
+	int CheckPointsCount; 
+	
+	UPROPERTY(EditAnywhere, Category = "Checkpoints")
 	TArray<FVector> CheckPointLocationList;
+
+	void CreateRandomCheckpoints();
 	
 	int CurrentCheckPointIndex = 0;
 
