@@ -11,7 +11,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="" />
+    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/AimLine.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/AimLine.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnrealFirstGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/UnrealFirstGame.uproject" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,13 +56,6 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\htran\\AppData\\Local\\Symbols\\src"
-    ]
   }
 }]]></component>
   <component name="RunManager" selected="C++ Project.UnrealFirstGame">
@@ -425,18 +427,6 @@
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
       </configuration_15>
-      <configuration_16>
-        <option name="CONFIGURATION" value="" />
-        <option name="PLATFORM" value="" />
-        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UnrealFirstGame.vcxproj" />
-        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXE_PATH" value="$(TargetPath)" />
-        <option name="PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
-        <option name="PASS_PARENT_ENVS" value="1" />
-        <option name="USE_EXTERNAL_CONSOLE" value="0" />
-        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="AUTO_DETECT" />
-      </configuration_16>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Intermediate/ProjectFiles/UnrealFirstGame.vcxproj" />
       <option name="AUTO_SELECT_PRIORITY" value="10010" />
       <method v="2">
@@ -516,6 +506,7 @@
       <workItem from="1739182243290" duration="1000" />
       <workItem from="1739183618829" duration="1000" />
       <workItem from="1739285207438" duration="6843000" />
+      <workItem from="1739308061239" duration="9993000" />
     </task>
     <servers />
   </component>

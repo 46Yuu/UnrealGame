@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class UNiagaraComponent;
 class USphereComponent;
 class UStaticMeshComponent;
 class UNiagaraSystem;
@@ -26,6 +27,9 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UNiagaraComponent* TrailVFXComp;
 	
 	UFUNCTION()
 	void OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -44,7 +48,22 @@ private:
 
 	FTimerHandle DelayBeforeReset;
 
-	UPROPERTY(EditAnywhere, Category = "InHole")
+	UPROPERTY(EditAnywhere, Category = "DestroyBall")
 	float DelayReset = 2.f;
 
+	void DestroyBall();
+
+	void DestroyBallEffect();
+
+	UPROPERTY(EditAnywhere, Category = "DestroyBall")
+	UNiagaraSystem* DestroyBallExplosionVFX;
+
+	void HideBall();
+
+	void HideTrail();
+
+	FTimerHandle DelayHideTrail;
+
+	UPROPERTY(EditAnywhere, Category = "Trail")
+	float DelayHide = 1.f;
 };

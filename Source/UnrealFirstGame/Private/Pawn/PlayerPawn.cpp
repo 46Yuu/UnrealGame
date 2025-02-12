@@ -30,13 +30,12 @@ void APlayerPawn::BeginPlay()
 			Subsystem->AddMappingContext(PlayerContext, 0);
 		}
 	}
-	
+	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,true);
 }
 
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,false);
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		PlayerController->GetHitResultUnderCursor(
@@ -100,13 +99,16 @@ void APlayerPawn::Fire()
 
 void APlayerPawn::CreateLine()
 {
-	for(float i = 0.1;i < 0.6; i++)
+	for(float i = 0.0;i < 0.6; i = i + 0.1f)
 	{
-		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+		if(AimLineVFX)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
 				this,
 				AimLineVFX,
 				FMath::Lerp(BallSpawnPoint->GetComponentLocation(),HitResult.ImpactPoint,i),
 				BallSpawnPoint->GetComponentRotation());
+		}
 	}
 	
 }

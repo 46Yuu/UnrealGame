@@ -1,6 +1,7 @@
 #include "Actors/Ball.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
+#include "NiagaraComponent.h"
 
 ABall::ABall()
 {
@@ -17,6 +18,9 @@ ABall::ABall()
 
 	SphereComp->SetSimulatePhysics(true);
 	SphereComp->SetCollisionProfileName("PhysicsActor");
+
+	TrailVFXComp = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Trail VFX"));
+	TrailVFXComp->SetupAttachment(SphereComp);
 
 	BaseMesh->SetCollisionProfileName("NoCollision");
 }
@@ -37,10 +41,9 @@ void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimi
 {
 	if(OtherComp->ComponentHasTag("HOLE_BOTTOM"))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-			TEXT("HELLO"));
 		if(ExplosionVFX)
 		{
+			HideBall();
 			UNiagaraFunctionLibrary::SpawnSystemAttached(
 				ExplosionVFX,
 				OtherComp,
@@ -50,7 +53,7 @@ void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimi
 				EAttachLocation::Type::KeepWorldPosition,
 				true);
 		}
-		GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::ResetPosition, DelayReset, false);
+		GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
 		return;
 	}
 	if(OtherActor->ActorHasTag("HOLE") && Comp->GetCollisionProfileName()!= "Ball_Hole")
@@ -58,6 +61,10 @@ void ABall::OnBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimi
 		Comp->SetCollisionProfileName("Ball_Hole",false);
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
 			Comp->GetCollisionProfileName().ToString());
+	}
+	if(OtherComp->ComponentHasTag("DESTROYER"))
+	{
+		DestroyBallEffect();
 	}
 
 }
@@ -81,6 +88,38 @@ void ABall::ResetPosition()
 	SphereComp->SetWorldLocation(BaseLocation);
 	SphereComp->SetCollisionProfileName("PhysicsActor");
 	SphereComp->SetSimulatePhysics(true);
+}
+
+void ABall::DestroyBall()
+{
+	this->Destroy();
+}
+
+void ABall::DestroyBallEffect()
+{
+	HideBall();
+	if(DestroyBallExplosionVFX)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			this,
+			DestroyBallExplosionVFX,
+			this->GetActorLocation(),
+			this->GetActorRotation());
+	}
+	GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
+}
+
+void ABall::HideBall()
+{
+	SphereComp->SetVisibility(false);
+	BaseMesh->SetVisibility(false);
+	SphereComp->SetSimulatePhysics(false);
+	GetWorldTimerManager().SetTimer(DelayHideTrail, this, &ABall::HideTrail, DelayHide, false);
+}
+
+void ABall::HideTrail()
+{
+	TrailVFXComp->SetVisibility(false);
 }
 
 

@@ -68,6 +68,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "AimLineVFX")
 	float DelayNewPoints = 1.f;
 
+	float CooldownNewPoints;
+
 	FHitResult HitResult;
 	
 	void Fire();
