@@ -67,11 +67,14 @@ void AHole::Tick(float DeltaTime)
 
 void AHole::MoveTowardsNextPoint()
 {
-	StartLocation = GetActorLocation();
-	Destination = CheckPointLocationList[CurrentCheckPointIndex] - StartLocation;
-	TotalDistance = Destination.Size();
-	Destination = Destination.GetSafeNormal();
-	CurrentDistance = 0.0f;
-	IsMoving = true;
+	if(CheckPointLocationList.Num() > 0)
+	{
+		StartLocation = GetActorLocation();
+		Destination = CheckPointLocationList[CurrentCheckPointIndex] - StartLocation;
+		TotalDistance = Destination.Size();
+		Destination = Destination.GetSafeNormal();
+		CurrentDistance = 0.0f;
+		IsMoving = true;
+	}
 }
 
