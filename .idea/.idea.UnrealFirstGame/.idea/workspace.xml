@@ -11,27 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/W_Cursor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/W_Cursor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/W_PlayerHud.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/BallExplosion.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/BallExplosion.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/PopUpExplosion.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/PopUpExplosion.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MegaMagicVFXBundle/VFX/MagicAuraVFX/Essentials/Materials/M_Shield.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MegaMagicVFXBundle/VFX/MagicAuraVFX/Essentials/Materials/M_Shield.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnrealFirstGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/UnrealFirstGame.uproject" afterDir="false" />
-    </list>
+    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -542,7 +522,7 @@
       <workItem from="1739452230477" duration="2251000" />
       <workItem from="1739454852584" duration="337000" />
       <workItem from="1739465496245" duration="106000" />
-      <workItem from="1739467288678" duration="3990000" />
+      <workItem from="1739467288678" duration="4031000" />
     </task>
     <servers />
   </component>
