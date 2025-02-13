@@ -36,8 +36,7 @@ AHole::AHole()
 
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 	BoxComp->SetupAttachment(RootComponent);
-
-	CurrentMultiplier = BaseMultiplier;
+	
 }
 	
 
@@ -45,11 +44,15 @@ void AHole::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AHole::MoveTowardsNextPoint, MoveDelay, false);
-	CreateRandomCheckpoints();
-	if(CheckPointLocationList.Num()>0)
+	if(!IsCheckpointRandom)
 	{
-		this->SetActorLocation(CheckPointLocationList[0]);
+		CreateRandomCheckpoints();
+		if(CheckPointLocationList.Num()>0)
+		{
+			this->SetActorLocation(CheckPointLocationList[0]);
+		}
 	}
+	CurrentMultiplier = BaseMultiplier;
 	UpdateTextRenderer();
 }
 
@@ -91,30 +94,40 @@ void AHole::Tick(float DeltaTime)
 
 void AHole::MoveTowardsNextPoint()
 {
-	if(CheckPointLocationList.Num() > 0)
+	StartLocation = GetActorLocation();
+	if(!IsCheckpointRandom && CheckPointLocationList.Num() > 0)
 	{
-		StartLocation = GetActorLocation();
 		Destination = CheckPointLocationList[CurrentCheckPointIndex] - StartLocation;
-		TotalDistance = Destination.Size();
-		Destination = Destination.GetSafeNormal();
-		CurrentDistance = 0.0f;
-		IsMoving = true;
 	}
+	else
+	{
+		Destination = CreateNextRandomCheckpoint() - StartLocation;
+	}
+	TotalDistance = Destination.Size();
+	Destination = Destination.GetSafeNormal();
+	CurrentDistance = 0.0f;
+	IsMoving = true;
 }
 
 void AHole::CreateRandomCheckpoints()
 {
 	for(int i =0; i< CheckPointsCount;i++)
 	{
-		FVector CheckpointPos;
 		FVector VerticalPos = FMath::Lerp(BottomLeftPoint,TopLeftPoint,FMath::FRandRange(0.f,1.f));
 		FVector HorizontalPos = FMath::Lerp(BottomLeftPoint,BottomRightPoint,FMath::FRandRange(0.f,1.f));
-		CheckpointPos = VerticalPos;
+		FVector CheckpointPos = VerticalPos;
 		CheckpointPos.Y = HorizontalPos.Y;
 		CheckPointLocationList.Add(CheckpointPos);
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,
-			CheckpointPos.ToString());
 	}
+}
+
+FVector AHole::CreateNextRandomCheckpoint()
+{
+	FVector VerticalPos = FMath::Lerp(BottomLeftPoint,TopLeftPoint,FMath::FRandRange(0.f,1.f));
+	FVector HorizontalPos = FMath::Lerp(BottomLeftPoint,BottomRightPoint,FMath::FRandRange(0.f,1.f));
+	FVector CheckpointPos = VerticalPos;
+	CheckpointPos.Y = HorizontalPos.Y;
+	return CheckpointPos;
 }
 
 void AHole::UpdateTextRenderer()

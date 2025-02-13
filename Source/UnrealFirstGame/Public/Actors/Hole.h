@@ -69,7 +69,11 @@ private:
 	void CreateRandomCheckpoints();
 	
 	int CurrentCheckPointIndex = 0;
+	
+	UPROPERTY(EditAnywhere, Category = "Checkpoints")
+	bool IsCheckpointRandom = false;
 
+	FVector CreateNextRandomCheckpoint();
 	FVector Destination;
 	FVector StartLocation;
 	float TotalDistance;
