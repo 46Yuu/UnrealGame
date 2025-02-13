@@ -36,6 +36,8 @@ AHole::AHole()
 
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 	BoxComp->SetupAttachment(RootComponent);
+
+	CurrentMultiplier = BaseMultiplier;
 }
 	
 
@@ -74,6 +76,17 @@ void AHole::Tick(float DeltaTime)
 			GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AHole::MoveTowardsNextPoint, MoveDelay, false);
 		}
 	}
+	if(IsResetting)
+	{
+		CurrentResetMultiplierTimer += UGameplayStatics::GetWorldDeltaSeconds(this);
+		if(CurrentResetMultiplierTimer > DelayResetMultiplier)
+		{
+			IsResetting = false;
+			CurrentResetMultiplierTimer = 0;
+			CurrentMultiplier = BaseMultiplier;
+			UpdateTextRenderer();
+		}
+	}
 }
 
 void AHole::MoveTowardsNextPoint()
@@ -106,6 +119,15 @@ void AHole::CreateRandomCheckpoints()
 
 void AHole::UpdateTextRenderer()
 {
-	FString Multiplier = FString::FromInt(BaseMultiplier);
+	FString Multiplier = FString::FromInt(CurrentMultiplier);
 	TextRenderComponent->SetText(FText::FromString("x"+Multiplier));
+	int Index = FMath::Min(FMath::FloorToInt(CurrentMultiplier / 2.0f), 4); 
+	TextRenderComponent->SetTextRenderColor(ColorMultipliers[Index]);
 }
+
+void AHole::StartIsReseting()
+{
+	IsResetting = true;
+	CurrentResetMultiplierTimer = 0;
+}
+

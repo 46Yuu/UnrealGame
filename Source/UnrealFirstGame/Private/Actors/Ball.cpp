@@ -127,8 +127,8 @@ void ABall::BallInHole(AActor* OtherActor, UPrimitiveComponent* OtherComp)
 			OtherActor->GetActorRotation(),
 			EAttachLocation::Type::KeepWorldPosition,
 			true);
-		IncrementHoleMultiplier(OtherActor);
 		IncrementScore(OtherActor);
+		IncrementHoleMultiplier(OtherActor);
 	}
 	GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
 }
@@ -138,7 +138,7 @@ void ABall::IncrementScore(AActor* OtherActor)
 	IncrementCombo();
 	AHole* HoleActor = Cast<AHole>(OtherActor);
 	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
-	int ScoreToAdd = BasePoint * HoleActor->BaseMultiplier * BallGameMode->CurrentCombo;
+	int ScoreToAdd = BasePoint * HoleActor->CurrentMultiplier * BallGameMode->CurrentCombo;
 	BallGameMode->CurrentScore = BallGameMode->CurrentScore + ScoreToAdd;
 	FString FloatScore = FString::SanitizeFloat(BallGameMode->CurrentScore);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
@@ -158,11 +158,12 @@ void ABall::IncrementCombo()
 void ABall::IncrementHoleMultiplier(AActor* OtherActor)
 {
 	AHole* HoleActor = Cast<AHole>(OtherActor);
-	HoleActor->BaseMultiplier++;
-	FString Multiplier = FString::SanitizeFloat(HoleActor->BaseMultiplier);
+	HoleActor->CurrentMultiplier++;
+	FString Multiplier = FString::SanitizeFloat(HoleActor->CurrentMultiplier);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue,
 	*Multiplier);
 	HoleActor->UpdateTextRenderer();
+	HoleActor->StartIsReseting();
 }
 
 void ABall::ResetCombo()

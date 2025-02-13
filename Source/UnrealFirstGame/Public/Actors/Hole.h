@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Hole.generated.h"
+class UNiagaraComponent;
 class UTextRenderComponent;
 class USphereComponent;
 class UBoxComponent;
@@ -17,10 +18,10 @@ public:
 	AHole();
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
-	int BaseMultiplier = 1;
+	int CurrentMultiplier;
 
 	void UpdateTextRenderer();
+	void StartIsReseting();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -76,5 +77,20 @@ private:
 	bool IsMoving = false;
 	
 	void MoveTowardsNextPoint();
+	
+	UPROPERTY(EditAnywhere, Category = "Colors Combo")
+	TArray<FColor> ColorMultipliers;
+	UPROPERTY(EditAnywhere, Category = "Colors Combo")
+	TArray<UNiagaraComponent*> HoleNiagaraList;
+
+	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
+	int BaseMultiplier = 1;
+	
+	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
+	float DelayResetMultiplier = 5.f;
+	
+	float CurrentResetMultiplierTimer = 0.f;
+	bool IsResetting = false;
+
 
 };
