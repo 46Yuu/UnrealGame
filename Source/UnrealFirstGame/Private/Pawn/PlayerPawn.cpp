@@ -7,15 +7,16 @@
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
+#include "GameMode/GameModeBallGame.h"
 
 APlayerPawn::APlayerPawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(RootComponent);
+	Camera->SetupAttachment(BallSpawnPoint);
 
 	BallSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Ball"));
-	BallSpawnPoint->SetupAttachment(Camera);
+	BallSpawnPoint->SetupAttachment(RootComponent);
 }
 
 void APlayerPawn::BeginPlay()
@@ -31,32 +32,46 @@ void APlayerPawn::BeginPlay()
 		}
 	}
 	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,true);
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	BallGameMode->StartPlaying();
 }
 
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
 	{
-		FHitResult TempHitResult;
-		PlayerController->GetHitResultUnderCursor(
-			ECC_Visibility,
-			false,
-			TempHitResult);
-		UPrimitiveComponent* Comp = TempHitResult.GetComponent();
-		if (Comp != nullptr)
+		//Hitresult
+		if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 		{
-			if(!Comp->ComponentHasTag("TRANSPARENT"))
+			FHitResult TempHitResult;
+			PlayerController->GetHitResultUnderCursor(
+				ECC_Visibility,
+				false,
+				TempHitResult);
+			UPrimitiveComponent* Comp = TempHitResult.GetComponent();
+			if (Comp != nullptr && !Comp->ComponentHasTag("TRANSPARENT"))
 			{
 				HitResult = TempHitResult;
 				RotateShootDirection(HitResult.ImpactPoint);
 			}
 		}
-		
-	}
-	if(IsPressing)
-	{
-		IncrementPressedTimer();
+
+		//ShootForce
+		if(IsPressing)
+		{
+			IncrementPressedTimer();
+		}
+
+		//Timer
+		BallGameMode->CurrentTime = BallGameMode->CurrentTime - UGameplayStatics::GetWorldDeltaSeconds(this);
+		if(BallGameMode->CurrentTime <= 0.f)
+		{
+			BallGameMode->StopPlaying();
+			IsPressing = false;
+			IsIncreasing = false;
+		}
 	}
 }
 
@@ -83,26 +98,35 @@ void APlayerPawn::RotateShootDirection(const FVector& LookAtTarget)
 
 void APlayerPawn::StartFire()
 {
-	IsPressing = true;
-	IsIncreasing = true;
-	FVector BallSpawnPointLocation = BallSpawnPoint->GetComponentLocation();
-	FRotator BallSpawnPointRotation = BallSpawnPoint->GetComponentRotation();
-	FTransform SpawnBallTransform(BallSpawnPointRotation, BallSpawnPointLocation,FVector(1,1,1));
-	CurrentBall = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
-	CurrentBall->SphereComp->SetSimulatePhysics(false);
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
+	{
+		IsPressing = true;
+		IsIncreasing = true;
+		FVector BallSpawnPointLocation = BallSpawnPoint->GetComponentLocation();
+		FRotator BallSpawnPointRotation = BallSpawnPoint->GetComponentRotation();
+		FTransform SpawnBallTransform(BallSpawnPointRotation, BallSpawnPointLocation,FVector(1,1,1));
+		CurrentBall = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
+		CurrentBall->SphereComp->SetSimulatePhysics(false);
+	}
+	
 }
 
 void APlayerPawn::Fire()
 {
-	IsPressing = false;
-	float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedLerped);
-	PressedTimer = 0;
-	PressedLerped = 0;
-	if (BallClass != nullptr)
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
 	{
-		CurrentBall->SphereComp->SetSimulatePhysics(true);
-		CurrentBall->SphereComp->SetWorldRotation(BallSpawnPoint->GetComponentRotation());
-		CurrentBall->SphereComp->AddImpulse(CurrentBall->GetActorForwardVector()*PowerShoot);
+		IsPressing = false;
+		float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedLerped);
+		PressedTimer = 0;
+		PressedLerped = 0;
+		if (BallClass != nullptr)
+		{
+			CurrentBall->SphereComp->SetSimulatePhysics(true);
+			CurrentBall->SphereComp->SetWorldRotation(BallSpawnPoint->GetComponentRotation());
+			CurrentBall->SphereComp->AddImpulse(CurrentBall->GetActorForwardVector()*PowerShoot);
+		}
 	}
 }
 

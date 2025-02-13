@@ -1,8 +1,10 @@
 #include "Actors/Hole.h"
 
+#include "Actors/TextPopUp.h"
 #include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "GameMode/GameModeBallGame.h"
 #include "Kismet/GameplayStatics.h"
 
 AHole::AHole()
@@ -59,7 +61,8 @@ void AHole::BeginPlay()
 void AHole::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if(IsMoving)
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(IsMoving && BallGameMode->IsPlaying)
 	{
 		if(CurrentDistance < TotalDistance)
 		{
@@ -143,4 +146,3 @@ void AHole::StartIsReseting()
 	IsResetting = true;
 	CurrentResetMultiplierTimer = 0;
 }
-

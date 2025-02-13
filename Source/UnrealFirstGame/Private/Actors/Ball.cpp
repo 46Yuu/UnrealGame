@@ -6,6 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "NiagaraComponent.h"
 #include "Actors/Hole.h"
+#include "Actors/TextPopUp.h"
 #include "GameMode/GameModeBallGame.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -141,6 +142,8 @@ void ABall::IncrementScore(AActor* OtherActor)
 	int ScoreToAdd = BasePoint * HoleActor->CurrentMultiplier * BallGameMode->CurrentCombo;
 	BallGameMode->CurrentScore = BallGameMode->CurrentScore + ScoreToAdd;
 	FString FloatScore = FString::SanitizeFloat(BallGameMode->CurrentScore);
+	FString PopUpString = "+"+FString::FromInt(ScoreToAdd);
+	SpawnPopUp(FText::FromString(PopUpString));
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green,
 	*FloatScore);
 
@@ -175,6 +178,12 @@ void ABall::ResetCombo()
 	*FloatCombo);
 }
 
-
-
-
+void ABall::SpawnPopUp(FText Score)
+{
+	FVector Location = SphereComp->GetComponentLocation();
+	Location.Z += 5.f;
+	FRotator Rotation = FRotator(0,0,0);
+	FTransform Transform(Rotation, Location,FVector(1,1,1));
+	ATextPopUp* ActorTextPopUp = GetWorld()->SpawnActor<ATextPopUp>(PopUpClass,Transform);
+	ActorTextPopUp->SetPopUpText(Score);
+}

@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{17DCBE0F-49F4-CD5A-DA20-539369CDD382}",
+	"EngineAssociation": "{B86355AB-4A59-6409-448B-B29B8EF8B825}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -9,7 +9,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"GameplayCameras"
 			]
 		}
 	],

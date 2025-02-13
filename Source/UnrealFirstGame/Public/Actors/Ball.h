@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class ATextPopUp;
 class UNiagaraComponent;
 class USphereComponent;
 class UStaticMeshComponent;
@@ -45,6 +46,11 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "InHole")
 	UNiagaraSystem* ExplosionVFX;
+	
+	UPROPERTY(EditAnywhere, Category = "Pop Up")
+	TSubclassOf<ATextPopUp> PopUpClass;
+
+	void SpawnPopUp(FText Score);
 
 	void BallInHole(AActor* OtherActor, UPrimitiveComponent* OtherComp);
 
