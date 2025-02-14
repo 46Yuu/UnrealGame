@@ -8,6 +8,7 @@ void AGameModeBallGame::StartPlaying()
 	IsPlaying = true;
 	GameEnded = false;
 	CurrentTime = TotalTime;
+	GetWorldTimerManager().SetTimer(TotalTimeHandle, this, &AGameModeBallGame::StopPlaying, TotalTime,false);
 }
 
 void AGameModeBallGame::StopPlaying()

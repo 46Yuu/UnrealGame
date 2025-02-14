@@ -24,6 +24,19 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot Properties")
 	float PressedLerped = 0.f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Shoot Properties")
+	FTimerHandle PressedTimerHandle;
+	
+	UPROPERTY(EditAnywhere, Category = "Shoot Properties")
+	float MaxShootPower;
+	
+	UPROPERTY(EditAnywhere, Category = "Shoot Properties")
+	float DelayToMaxShoot;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shoot Properties")
+	float CurrentPressedShootValue;
+	
 protected:
 	virtual void BeginPlay() override;
 	
@@ -54,18 +67,9 @@ private:
 
 	ABall* CurrentBall;
 	
-	double PressedTimer;
-	
 	bool IsPressing;
 	bool IsIncreasing = true;
-
-	void IncrementPressedTimer();
 	
-	UPROPERTY(EditAnywhere, Category = "Ball Properties")
-	float MaxShootPower;
-	
-	UPROPERTY(EditAnywhere, Category = "Ball Properties")
-	double DelayToMaxShoot;
 
 	UPROPERTY(EditAnywhere, Category = "AimLineVFX")
 	UNiagaraSystem* AimLineVFX;
@@ -90,4 +94,9 @@ private:
 
 	void PlayShootSFX();
 	void PlayPressShootSFX();
+
+
+	void IncrementPressedShootValue();
+
+	void DecrementPressedShootValue();
 };

@@ -12,27 +12,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_Ball.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_TextPopUp.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_StartMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_StartMenu.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_Cursor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_Cursor.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/8-bit-laser-151672_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/8-bit-laser-151672_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom1_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom1_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom3_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom3_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom6_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom6_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom8_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom8_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-1-236677_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-1-236677_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-3-236679_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-3-236679_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-4-236671_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-4-236671_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/sound1_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/sound1_Cue.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/02-Levels/StartScreen.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/StartScreen.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/TextPopUp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/TextPopUp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Hole.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Hole.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,27 +52,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C++ Project.UnrealFirstGame.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C++ Project.UnrealFirstGame.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\htran\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\htran\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.UnrealFirstGame">
     <configuration name="UE5" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -546,7 +538,8 @@
       <workItem from="1739465496245" duration="106000" />
       <workItem from="1739467288678" duration="4031000" />
       <workItem from="1739476715677" duration="4766000" />
-      <workItem from="1739519375677" duration="2532000" />
+      <workItem from="1739519375677" duration="6638000" />
+      <workItem from="1739532411407" duration="5612000" />
     </task>
     <servers />
   </component>

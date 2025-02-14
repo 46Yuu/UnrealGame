@@ -16,8 +16,12 @@ public :
 	
 	int CountBallInHole;
 
-	UPROPERTY(EditAnywhere, Category = "Game Properties")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Game Properties")
 	float TotalTime = 120.f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Game Properties")
+	FTimerHandle TotalTimeHandle;
+	
 
 	UPROPERTY(BlueprintReadWrite, Category = "Time Properties")
 	float CurrentTime;

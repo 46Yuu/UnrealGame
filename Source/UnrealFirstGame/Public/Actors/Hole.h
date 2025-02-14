@@ -22,6 +22,18 @@ public:
 
 	void UpdateTextRenderer();
 	void StartIsReseting();
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Hole Properties")
+	float MoveDelay = 1.f;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Hole Properties")
+	FTimerHandle MoveTimerHandle;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Ball Scoring")
+	float DelayResetMultiplier = 5.f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "Ball Scoring")
+	FTimerHandle DelayResetTimerHandle;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -45,11 +57,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UTextRenderComponent* TextRenderCooldownComponent;
-
-	FTimerHandle MoveTimerHandle;
 	
-	UPROPERTY(EditAnywhere, Category = "Hole Properties")
-	float MoveDelay = 1.f;
 
 	UPROPERTY(EditAnywhere, Category = "Hole Properties")
 	float MoveSpeed = 2.f;
@@ -93,11 +101,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
 	int BaseMultiplier = 1;
 	
-	UPROPERTY(EditAnywhere, Category = "Ball Scoring")
-	float DelayResetMultiplier = 5.f;
+
 	
 	float CurrentResetMultiplierTimer = 0.f;
 	bool IsResetting = false;
 
 	void UpdateTextCooldownRender();
+	
+	void CountDownResetCooldown();
+	void ResetMultiplier();
 };

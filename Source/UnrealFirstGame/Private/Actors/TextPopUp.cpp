@@ -25,8 +25,8 @@ void ATextPopUp::BeginPlay()
 void ATextPopUp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-		SetActorLocation(FMath::VInterpTo(GetActorLocation(),EndLocation,
-		UGameplayStatics::GetWorldDeltaSeconds(this),InterpSpeed));
+	SetActorLocation(FMath::VInterpTo(GetActorLocation(),EndLocation,
+	UGameplayStatics::GetWorldDeltaSeconds(this),InterpSpeed));
 }
 
 void ATextPopUp::SetPopUpText(FText Text)

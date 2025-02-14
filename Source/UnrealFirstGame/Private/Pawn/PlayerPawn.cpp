@@ -33,6 +33,8 @@ void APlayerPawn::BeginPlay()
 		}
 	}
 	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,true);
+
+	//Timer
 	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
 	BallGameMode->StartPlaying();
 }
@@ -57,21 +59,6 @@ void APlayerPawn::Tick(float DeltaTime)
 				HitResult = TempHitResult;
 				RotateShootDirection(HitResult.ImpactPoint);
 			}
-		}
-
-		//ShootForce
-		if(IsPressing)
-		{
-			IncrementPressedTimer();
-		}
-
-		//Timer
-		BallGameMode->CurrentTime = BallGameMode->CurrentTime - UGameplayStatics::GetWorldDeltaSeconds(this);
-		if(BallGameMode->CurrentTime <= 0.f)
-		{
-			BallGameMode->StopPlaying();
-			IsPressing = false;
-			IsIncreasing = false;
 		}
 	}
 }
@@ -110,6 +97,7 @@ void APlayerPawn::StartFire()
 		CurrentBall = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
 		CurrentBall->SphereComp->SetSimulatePhysics(false);
 		PlayPressShootSFX();
+		GetWorldTimerManager().SetTimer(PressedTimerHandle, this, &APlayerPawn::IncrementPressedShootValue, 0.001f, false);
 	}
 	
 }
@@ -121,7 +109,7 @@ void APlayerPawn::Fire()
 	{
 		IsPressing = false;
 		float PowerShoot = FMath::Lerp(0,MaxShootPower,PressedLerped);
-		PressedTimer = 0;
+		CurrentPressedShootValue = 0;
 		PressedLerped = 0;
 		if (BallClass != nullptr)
 		{
@@ -149,27 +137,6 @@ void APlayerPawn::CreateLine()
 	
 }
 
-void APlayerPawn::IncrementPressedTimer()
-{
-	if(PressedTimer < DelayToMaxShoot && IsIncreasing)
-	{
-		PressedTimer += UGameplayStatics::GetWorldDeltaSeconds(this);
-		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
-		if(PressedTimer >=DelayToMaxShoot)
-		{
-			IsIncreasing = false;
-		}
-	}
-	else if(PressedTimer > 0 && !IsIncreasing)
-	{
-		PressedTimer -= UGameplayStatics::GetWorldDeltaSeconds(this);
-		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,PressedTimer);
-		if(PressedTimer <=0)
-		{
-			IsIncreasing = true;
-		}
-	}
-}
 
 void APlayerPawn::PlayShootSFX()
 {
@@ -197,5 +164,37 @@ void APlayerPawn::PlayPressShootSFX()
 				ShootPressSFX);
 		}
 	}
+}
+
+void APlayerPawn::IncrementPressedShootValue()
+{
+	if(CurrentPressedShootValue < DelayToMaxShoot  && IsPressing)
+	{
+		CurrentPressedShootValue += 0.01f;
+		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,CurrentPressedShootValue);
+		if(CurrentPressedShootValue >=DelayToMaxShoot)
+		{
+			GetWorldTimerManager().SetTimer(PressedTimerHandle, this, &APlayerPawn::DecrementPressedShootValue, 0.001f, false);
+			return;
+		}
+		GetWorldTimerManager().SetTimer(PressedTimerHandle, this, &APlayerPawn::IncrementPressedShootValue, 0.001f, false);
+	}
+	
+}
+
+void APlayerPawn::DecrementPressedShootValue()
+{
+	if(CurrentPressedShootValue > 0 && IsPressing)
+	{
+		CurrentPressedShootValue -= UGameplayStatics::GetWorldDeltaSeconds(this);
+		PressedLerped = FMath::Lerp(0,DelayToMaxShoot,CurrentPressedShootValue);
+		if(CurrentPressedShootValue <=0)
+		{
+			GetWorldTimerManager().SetTimer(PressedTimerHandle, this, &APlayerPawn::IncrementPressedShootValue, 0.001f, false);
+			return;
+		}
+		GetWorldTimerManager().SetTimer(PressedTimerHandle, this, &APlayerPawn::DecrementPressedShootValue, 0.001f, false);
+	}
+	
 }
 

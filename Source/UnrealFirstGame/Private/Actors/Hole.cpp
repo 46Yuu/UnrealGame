@@ -51,10 +51,13 @@ void AHole::BeginPlay()
 	GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AHole::MoveTowardsNextPoint, MoveDelay, false);
 	if(!IsCheckpointRandom)
 	{
-		CreateRandomCheckpoints();
-		if(CheckPointLocationList.Num()>0)
+		if(CheckPointsCount>0)
 		{
-			this->SetActorLocation(CheckPointLocationList[0]);
+			CreateRandomCheckpoints();
+			if(CheckPointLocationList.Num()>0)
+			{
+				this->SetActorLocation(CheckPointLocationList[0]);
+			}
 		}
 	}
 	CurrentMultiplier = BaseMultiplier;
@@ -84,19 +87,6 @@ void AHole::Tick(float DeltaTime)
 			}
 			IsMoving = false;
 			GetWorldTimerManager().SetTimer(MoveTimerHandle, this, &AHole::MoveTowardsNextPoint, MoveDelay, false);
-		}
-	}
-	if(IsResetting)
-	{
-		CurrentResetMultiplierTimer -= UGameplayStatics::GetWorldDeltaSeconds(this);
-		UpdateTextCooldownRender();
-		if(CurrentResetMultiplierTimer <= 0)
-		{
-			IsResetting = false;
-			CurrentResetMultiplierTimer = DelayResetMultiplier;
-			CurrentMultiplier = BaseMultiplier;
-			UpdateTextRenderer();
-			TextRenderCooldownComponent->SetVisibility(false);
 		}
 	}
 }
@@ -159,4 +149,29 @@ void AHole::StartIsReseting()
 	IsResetting = true;
 	CurrentResetMultiplierTimer = DelayResetMultiplier;
 	TextRenderCooldownComponent->SetVisibility(true);
+
+	GetWorldTimerManager().SetTimer(DelayResetTimerHandle, this, &AHole::CountDownResetCooldown,1.f,false);
+	UpdateTextCooldownRender();
+}
+
+void AHole::CountDownResetCooldown()
+{
+	CurrentResetMultiplierTimer --;
+	UpdateTextCooldownRender();
+	if(CurrentResetMultiplierTimer > 0)
+	{
+		GetWorldTimerManager().SetTimer(DelayResetTimerHandle, this, &AHole::CountDownResetCooldown,1.f,false);
+		return;
+	}
+	ResetMultiplier();
+}
+
+
+void AHole::ResetMultiplier()
+{
+	IsResetting = false;
+	CurrentResetMultiplierTimer = DelayResetMultiplier;
+	CurrentMultiplier = BaseMultiplier;
+	UpdateTextRenderer();
+	TextRenderCooldownComponent->SetVisibility(false);
 }
