@@ -12,17 +12,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_Ball.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_BallCPP.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_HoleCPP.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/BP_Player.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/BP_TextPopUp.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_StartMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_StartMenu.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_StartScreen.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_StartScreen.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/03-Materials/M_EndScreenPattern.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/03-Materials/M_EndScreenPattern.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/8-bit-laser-151672_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/8-bit-laser-151672_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom1_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom1_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom3_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom3_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom6_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom6_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom8_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/boom8_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-1-236677_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-1-236677_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-3-236679_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-3-236679_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-4-236671_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/retro-coin-4-236671_Cue.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/sound1_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/04-Assets/Sounds/SoundCue/sound1_Cue.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnrealFirstGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/UnrealFirstGame.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +72,13 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\htran\\AppData\\Local\\Symbols\\src"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="C++ Project.UnrealFirstGame">
@@ -529,6 +546,7 @@
       <workItem from="1739465496245" duration="106000" />
       <workItem from="1739467288678" duration="4031000" />
       <workItem from="1739476715677" duration="4766000" />
+      <workItem from="1739519375677" duration="2532000" />
     </task>
     <servers />
   </component>

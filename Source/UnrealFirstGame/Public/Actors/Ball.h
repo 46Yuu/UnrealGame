@@ -11,7 +11,6 @@ class UStaticMeshComponent;
 class UNiagaraSystem;
 class USoundCue;
 
-
 UCLASS()
 class UNREALFIRSTGAME_API ABall : public AActor
 {
@@ -96,4 +95,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Trail")
 	float DelayHide = 1.f;
+
+	
 };
