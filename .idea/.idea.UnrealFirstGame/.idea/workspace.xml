@@ -12,18 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_Cursor.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_Cursor.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_PlayerHud.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/02-Levels/StartScreen.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/StartScreen.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Hole.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/TextPopUp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/TextPopUp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/GameMode/GameModeBallGame.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Pawn/PlayerPawn.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Hole.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Hole.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/GameMode/GameModeBallGame.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Pawn/PlayerPawn.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -539,7 +531,7 @@
       <workItem from="1739467288678" duration="4031000" />
       <workItem from="1739476715677" duration="4766000" />
       <workItem from="1739519375677" duration="6638000" />
-      <workItem from="1739532411407" duration="5612000" />
+      <workItem from="1739532411407" duration="6601000" />
     </task>
     <servers />
   </component>

@@ -99,4 +99,8 @@ private:
 	void IncrementPressedShootValue();
 
 	void DecrementPressedShootValue();
+
+	AGameModeBallGame* GameModeBallGame;
+
+	APlayerController* PlayerController;
 };

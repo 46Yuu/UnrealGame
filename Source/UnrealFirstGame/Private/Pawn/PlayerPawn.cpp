@@ -35,18 +35,20 @@ void APlayerPawn::BeginPlay()
 	GetWorldTimerManager().SetTimer(DelayBeforeNewPoints, this, &APlayerPawn::CreateLine,DelayNewPoints,true);
 
 	//Timer
-	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
-	BallGameMode->StartPlaying();
+	GameModeBallGame = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	GameModeBallGame->StartPlaying();
+
+	PlayerController = Cast<APlayerController>(Controller)
 }
 
 void APlayerPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
-	if(BallGameMode->IsPlaying)
+	
+	if(GameModeBallGame->IsPlaying)
 	{
 		//Hitresult
-		if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+		if (PlayerController)
 		{
 			FHitResult TempHitResult;
 			PlayerController->GetHitResultUnderCursor(

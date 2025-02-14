@@ -110,4 +110,6 @@ private:
 	
 	void CountDownResetCooldown();
 	void ResetMultiplier();
+
+	AGameModeBallGame* GameModeBallGame;
 };

@@ -63,13 +63,14 @@ void AHole::BeginPlay()
 	CurrentMultiplier = BaseMultiplier;
 	UpdateTextRenderer();
 	TextRenderCooldownComponent->SetVisibility(false);
+	GameModeBallGame = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 void AHole::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
-	if(IsMoving && BallGameMode->IsPlaying)
+
+	if(IsMoving && GameModeBallGame->IsPlaying)
 	{
 		if(CurrentDistance < TotalDistance)
 		{
