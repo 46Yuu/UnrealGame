@@ -8,6 +8,7 @@ class UTextRenderComponent;
 class USphereComponent;
 class UBoxComponent;
 class UStaticMeshComponent;
+class AGameModeBallGame;
 
 UCLASS()
 class UNREALFIRSTGAME_API AHole : public AActor

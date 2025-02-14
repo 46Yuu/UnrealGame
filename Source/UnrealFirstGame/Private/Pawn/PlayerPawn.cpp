@@ -38,7 +38,7 @@ void APlayerPawn::BeginPlay()
 	GameModeBallGame = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
 	GameModeBallGame->StartPlaying();
 
-	PlayerController = Cast<APlayerController>(Controller)
+	PlayerController = Cast<APlayerController>(Controller);
 }
 
 void APlayerPawn::Tick(float DeltaTime)

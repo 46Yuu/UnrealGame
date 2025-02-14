@@ -10,6 +10,8 @@ class UInputAction;
 class UCameraComponent;
 class UNiagaraSystem;
 class USoundCue;
+class AGameModeBallGame;
+class APlayerController;
 
 UCLASS()
 class UNREALFIRSTGAME_API APlayerPawn : public APawn
