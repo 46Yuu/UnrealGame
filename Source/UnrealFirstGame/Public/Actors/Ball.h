@@ -9,6 +9,8 @@ class UNiagaraComponent;
 class USphereComponent;
 class UStaticMeshComponent;
 class UNiagaraSystem;
+class USoundCue;
+
 
 UCLASS()
 class UNREALFIRSTGAME_API ABall : public AActor
@@ -39,13 +41,22 @@ private:
 	UFUNCTION()
 	void OnEndOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex);
-
+	
 	void ResetPosition();
 
 	FVector BaseLocation;
 
 	UPROPERTY(EditAnywhere, Category = "InHole")
 	UNiagaraSystem* ExplosionVFX;
+
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	TArray<USoundCue*> ExplosionSFXList;
+
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	TArray<USoundCue*> CoinSFXList;
+
+	void PlayExplosionSFX();
+	void PlayCoinSFX();
 	
 	UPROPERTY(EditAnywhere, Category = "Pop Up")
 	TSubclassOf<ATextPopUp> PopUpClass;

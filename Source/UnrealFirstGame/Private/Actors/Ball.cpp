@@ -9,6 +9,7 @@
 #include "Actors/TextPopUp.h"
 #include "GameMode/GameModeBallGame.h"
 #include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 ABall::ABall()
 {
@@ -98,6 +99,7 @@ void ABall::DestroyBallEffect()
 			this->GetActorLocation(),
 			this->GetActorRotation());
 	}
+	PlayExplosionSFX();
 	GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
 }
 
@@ -128,8 +130,13 @@ void ABall::BallInHole(AActor* OtherActor, UPrimitiveComponent* OtherComp)
 			OtherActor->GetActorRotation(),
 			EAttachLocation::Type::KeepWorldPosition,
 			true);
-		IncrementScore(OtherActor);
-		IncrementHoleMultiplier(OtherActor);
+		AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+		if(BallGameMode->IsPlaying)
+		{
+			PlayCoinSFX();
+			IncrementScore(OtherActor);
+			IncrementHoleMultiplier(OtherActor);
+		}
 	}
 	GetWorldTimerManager().SetTimer(DelayBeforeReset, this, &ABall::DestroyBall, DelayReset, false);
 }
@@ -139,8 +146,10 @@ void ABall::IncrementScore(AActor* OtherActor)
 	IncrementCombo();
 	AHole* HoleActor = Cast<AHole>(OtherActor);
 	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	
 	int ScoreToAdd = BasePoint * HoleActor->CurrentMultiplier * BallGameMode->CurrentCombo;
 	BallGameMode->CurrentScore = BallGameMode->CurrentScore + ScoreToAdd;
+	
 	FString FloatScore = FString::SanitizeFloat(BallGameMode->CurrentScore);
 	FString PopUpString = "+"+FString::FromInt(ScoreToAdd);
 	SpawnPopUp(FText::FromString(PopUpString));
@@ -187,3 +196,31 @@ void ABall::SpawnPopUp(FText Score)
 	ATextPopUp* ActorTextPopUp = GetWorld()->SpawnActor<ATextPopUp>(PopUpClass,Transform);
 	ActorTextPopUp->SetPopUpText(Score);
 }
+
+void ABall::PlayExplosionSFX()
+{
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
+	{
+		int index = FMath::RandRange(0,ExplosionSFXList.Num()-1);
+		if (ExplosionSFXList[index])
+		{
+			UGameplayStatics::PlaySound2D(
+				this,
+				ExplosionSFXList[index]);
+		}
+	}
+}
+
+void ABall::PlayCoinSFX()
+{
+	int index = FMath::RandRange(0,CoinSFXList.Num()-1);
+	if (CoinSFXList[index])
+	{
+		UGameplayStatics::PlaySound2D(
+			this,
+			CoinSFXList[index]);
+	}
+}
+
+

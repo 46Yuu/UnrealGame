@@ -9,6 +9,7 @@ class UInputMappingContext;
 class UInputAction;
 class UCameraComponent;
 class UNiagaraSystem;
+class USoundCue;
 
 UCLASS()
 class UNREALFIRSTGAME_API APlayerPawn : public APawn
@@ -81,4 +82,12 @@ private:
 	FHitResult HitResult;
 	
 	void Fire();
+
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	USoundCue* ShootSFX;
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	USoundCue* ShootPressSFX;
+
+	void PlayShootSFX();
+	void PlayPressShootSFX();
 };

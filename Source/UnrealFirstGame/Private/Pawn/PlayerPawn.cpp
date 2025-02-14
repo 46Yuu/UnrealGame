@@ -8,6 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "GameMode/GameModeBallGame.h"
+#include "Sound/SoundCue.h"
 
 APlayerPawn::APlayerPawn()
 {
@@ -108,6 +109,7 @@ void APlayerPawn::StartFire()
 		FTransform SpawnBallTransform(BallSpawnPointRotation, BallSpawnPointLocation,FVector(1,1,1));
 		CurrentBall = GetWorld()->SpawnActor<ABall>(BallClass, SpawnBallTransform);
 		CurrentBall->SphereComp->SetSimulatePhysics(false);
+		PlayPressShootSFX();
 	}
 	
 }
@@ -126,6 +128,7 @@ void APlayerPawn::Fire()
 			CurrentBall->SphereComp->SetSimulatePhysics(true);
 			CurrentBall->SphereComp->SetWorldRotation(BallSpawnPoint->GetComponentRotation());
 			CurrentBall->SphereComp->AddImpulse(CurrentBall->GetActorForwardVector()*PowerShoot);
+			PlayShootSFX();
 		}
 	}
 }
@@ -168,5 +171,31 @@ void APlayerPawn::IncrementPressedTimer()
 	}
 }
 
+void APlayerPawn::PlayShootSFX()
+{
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
+	{
+		if (ShootSFX)
+		{
+			UGameplayStatics::PlaySound2D(
+				this,
+				ShootSFX);
+		}
+	}
+}
 
+void APlayerPawn::PlayPressShootSFX()
+{
+	AGameModeBallGame* BallGameMode = Cast<AGameModeBallGame>(UGameplayStatics::GetGameMode(GetWorld()));
+	if(BallGameMode->IsPlaying)
+	{
+		if (ShootPressSFX)
+		{
+			UGameplayStatics::PlaySound2D(
+				this,
+				ShootPressSFX);
+		}
+	}
+}
 

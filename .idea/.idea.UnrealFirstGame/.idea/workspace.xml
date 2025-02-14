@@ -11,7 +11,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="" />
+    <list default="true" id="f485a748-c173-4085-8f4e-eee39dc0ac23" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnrealFirstGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/GM_Game.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_EndScreen.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_StartScreen.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/01-Blueprints/Widgets/W_StartScreen.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/02-Levels/Level1.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/03-Materials/M_EndScreenPattern.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/03-Materials/M_EndScreenPattern.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Private/Actors/Ball.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/UnrealFirstGame/Public/Actors/Ball.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnrealFirstGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/UnrealFirstGame.uproject" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,13 +62,6 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\htran\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\htran\\AppData\\Local\\Symbols\\src"
-    ]
   }
 }]]></component>
   <component name="RunManager" selected="C++ Project.UnrealFirstGame">
@@ -523,6 +528,7 @@
       <workItem from="1739454852584" duration="337000" />
       <workItem from="1739465496245" duration="106000" />
       <workItem from="1739467288678" duration="4031000" />
+      <workItem from="1739476715677" duration="4766000" />
     </task>
     <servers />
   </component>

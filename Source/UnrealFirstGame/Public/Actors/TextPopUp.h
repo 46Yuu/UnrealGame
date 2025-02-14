@@ -6,6 +6,8 @@
 
 class UTextRenderComponent;
 class UNiagaraSystem;
+class USoundCue;
+
 
 UCLASS()
 class UNREALFIRSTGAME_API ATextPopUp : public AActor
@@ -51,4 +53,9 @@ private:
 
 	void StartDestroyPopUp();
 	void DestroyPopUp();
+	
+	UPROPERTY(EditAnywhere, Category = "SFX")
+	TArray<USoundCue*> ExplosionSFX;
+
+	void PlayExplosionSFX();
 };

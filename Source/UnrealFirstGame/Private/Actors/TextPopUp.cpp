@@ -1,5 +1,5 @@
 #include "Actors/TextPopUp.h"
-
+#include "Sound/SoundCue.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Components/TextRenderComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -50,6 +50,7 @@ void ATextPopUp::StartDestroyPopUp()
 			this->GetActorLocation(),
 			this->GetActorRotation());
 	}
+	PlayExplosionSFX();
 	GetWorldTimerManager().SetTimer(ExplosionTimerHandle, this, &ATextPopUp::DestroyPopUp, DelayExplosion, false);
 }
 
@@ -57,4 +58,15 @@ void ATextPopUp::StartDestroyPopUp()
 void ATextPopUp::DestroyPopUp()
 {
 	this->Destroy();
+}
+
+void ATextPopUp::PlayExplosionSFX()
+{
+	int index = FMath::RandRange(0,ExplosionSFX.Num()-1);
+	if (ExplosionSFX[index])
+	{
+		UGameplayStatics::PlaySound2D(
+			this,
+			ExplosionSFX[index]);
+	}
 }
