@@ -43,6 +43,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UTextRenderComponent* TextRenderComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UTextRenderComponent* TextRenderCooldownComponent;
+
 	FTimerHandle MoveTimerHandle;
 	
 	UPROPERTY(EditAnywhere, Category = "Hole Properties")
@@ -96,5 +99,5 @@ private:
 	float CurrentResetMultiplierTimer = 0.f;
 	bool IsResetting = false;
 
-
+	void UpdateTextCooldownRender();
 };

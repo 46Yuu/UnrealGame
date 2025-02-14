@@ -8,5 +8,9 @@ UCLASS()
 class UNREALFIRSTGAME_API UGameInstanceCustom : public UGameInstance
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite , Category = "SaveGame")
+	FString Username;
 };
+

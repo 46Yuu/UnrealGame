@@ -38,6 +38,9 @@ AHole::AHole()
 
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
 	BoxComp->SetupAttachment(RootComponent);
+
+	TextRenderCooldownComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("Text Cooldown Renderer"));
+	TextRenderCooldownComponent->SetupAttachment(SphereComp);
 	
 }
 	
@@ -56,6 +59,7 @@ void AHole::BeginPlay()
 	}
 	CurrentMultiplier = BaseMultiplier;
 	UpdateTextRenderer();
+	TextRenderCooldownComponent->SetVisibility(false);
 }
 
 void AHole::Tick(float DeltaTime)
@@ -84,13 +88,15 @@ void AHole::Tick(float DeltaTime)
 	}
 	if(IsResetting)
 	{
-		CurrentResetMultiplierTimer += UGameplayStatics::GetWorldDeltaSeconds(this);
-		if(CurrentResetMultiplierTimer > DelayResetMultiplier)
+		CurrentResetMultiplierTimer -= UGameplayStatics::GetWorldDeltaSeconds(this);
+		UpdateTextCooldownRender();
+		if(CurrentResetMultiplierTimer <= 0)
 		{
 			IsResetting = false;
-			CurrentResetMultiplierTimer = 0;
+			CurrentResetMultiplierTimer = DelayResetMultiplier;
 			CurrentMultiplier = BaseMultiplier;
 			UpdateTextRenderer();
+			TextRenderCooldownComponent->SetVisibility(false);
 		}
 	}
 }
@@ -111,6 +117,7 @@ void AHole::MoveTowardsNextPoint()
 	CurrentDistance = 0.0f;
 	IsMoving = true;
 }
+
 
 void AHole::CreateRandomCheckpoints()
 {
@@ -141,8 +148,15 @@ void AHole::UpdateTextRenderer()
 	TextRenderComponent->SetTextRenderColor(ColorMultipliers[Index]);
 }
 
+void AHole::UpdateTextCooldownRender()
+{
+	FString Timer = FString::Printf(TEXT("%.0f"), CurrentResetMultiplierTimer);
+	TextRenderCooldownComponent->SetText(FText::FromString(Timer));
+}
+
 void AHole::StartIsReseting()
 {
 	IsResetting = true;
-	CurrentResetMultiplierTimer = 0;
+	CurrentResetMultiplierTimer = DelayResetMultiplier;
+	TextRenderCooldownComponent->SetVisibility(true);
 }
